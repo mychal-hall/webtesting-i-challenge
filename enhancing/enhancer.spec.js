@@ -30,3 +30,21 @@ describe("enhancement success", () => {
     expect(enhancer.succeed(item).enhancement).toBe(20);
   });
 });
+
+describe("enhancement failure", () => {
+  it("creates a new object", () => {
+    expect(enhancer.repair(gladius)).not.toBe(gladius);
+  });
+  it("decreases durability by 5, if enhancement is < 15", () => {
+    const item = { ...gladius, durability: 20 };
+    expect(enhancer.fail(item).durability).toBe(15);
+  });
+  it("decreases durability by 10, if enhancement is > 15", () => {
+    const item = { ...gladius, durability: 20 };
+    expect(enhancer.fail(item).durability).toBe(10);
+  });
+  it("decreases enhancement by 1, if enhancement is > 16", () => {
+    const item = { ...gladius, enhancement: 20 };
+    expect(enhancer.fail(item).enhancement).toBe(19);
+  });
+});
